@@ -1,0 +1,349 @@
+:root {
+  --paper: #f3efe4;
+  --paper-raised: #fbf9f3;
+  --ink: #221f1a;
+  --ink-soft: #5c5648;
+  --line: #d9d0ba;
+  --accent: #2f5d50;
+  --accent-soft: #dfe9e2;
+  --accent-ink: #16302a;
+  --wrong: #a13d2f;
+  --wrong-soft: #f4e2dd;
+  --radius: 3px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1c1a16;
+    --paper-raised: #262319;
+    --ink: #ece6d6;
+    --ink-soft: #b3aa93;
+    --line: #3a352a;
+    --accent: #6fae98;
+    --accent-soft: #26352e;
+    --accent-ink: #d3ecdf;
+    --wrong: #d9836f;
+    --wrong-soft: #3a2620;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #1c1a16;
+  --paper-raised: #262319;
+  --ink: #ece6d6;
+  --ink-soft: #b3aa93;
+  --line: #3a352a;
+  --accent: #6fae98;
+  --accent-soft: #26352e;
+  --accent-ink: #d3ecdf;
+  --wrong: #d9836f;
+  --wrong-soft: #3a2620;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 24px 100px;
+}
+
+.masthead {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.masthead h1 {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 2rem;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.masthead .tagline {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.upload-zone {
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 40px 24px;
+  text-align: center;
+  background: var(--paper-raised);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.upload-zone.drag-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.upload-zone p {
+  margin: 0 0 16px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.upload-zone .filename {
+  font-family: "Fraunces", serif;
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.btn {
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 11px 22px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+  transition: transform 0.1s ease, opacity 0.15s ease;
+}
+
+.btn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper-raised);
+}
+
+.status-line {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.status-line.error {
+  color: var(--wrong);
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 40px 0 0;
+  border-bottom: 1.5px solid var(--line);
+}
+
+.tab {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+  padding: 10px 4px;
+  margin-right: 28px;
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  position: relative;
+  top: 1.5px;
+}
+
+.tab.active {
+  color: var(--ink);
+  border-bottom: 2.5px solid var(--accent);
+  padding-bottom: 9px;
+}
+
+.tab:disabled {
+  color: var(--line);
+  cursor: not-allowed;
+}
+
+.panel {
+  padding: 32px 0;
+}
+
+.summary-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.summary-text h3 {
+  font-family: "Fraunces", serif;
+  font-size: 1.15rem;
+  margin: 24px 0 8px;
+}
+
+.summary-text h3:first-child {
+  margin-top: 0;
+}
+
+.quiz-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.quiz-controls label {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.quiz-controls input[type="number"] {
+  width: 56px;
+  padding: 6px 8px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+}
+
+.question-card {
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 20px;
+  background: var(--paper-raised);
+}
+
+.question-card .q-number {
+  font-family: "Fraunces", serif;
+  font-size: 0.85rem;
+  color: var(--accent);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.question-card .q-text {
+  font-size: 1.02rem;
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 11px 14px;
+  margin-bottom: 8px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+  font-size: 0.94rem;
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.option:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.option.correct {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+
+.option.incorrect {
+  border-color: var(--wrong);
+  background: var(--wrong-soft);
+  color: var(--wrong);
+}
+
+.explanation {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.score-line {
+  font-family: "Fraunces", serif;
+  font-size: 1.2rem;
+  margin: 8px 0 28px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--paper);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 8px;
+  vertical-align: -2px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 520px) {
+  .masthead h1 {
+    font-size: 1.6rem;
+  }
+  .page {
+    padding: 36px 16px 80px;
+  }
+}
