@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 
-const API_BASE = "https://study-buddy-backend-doux.onrender.com/";
+const API_BASE = "https://study-buddy-backend-doux.onrender.com";
 
 // Safely parses a fetch response as JSON, with a clear error if the server
 // returned something else (e.g. an HTML error page during a cold start).
