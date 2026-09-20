@@ -137,6 +137,10 @@ body {
   }
 }
 
+input[type="file"] {
+  display: none;
+}
+
 .btn {
   font-family: "Inter", sans-serif;
   font-size: 0.9rem;

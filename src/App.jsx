@@ -2,6 +2,20 @@ import React, { useState, useCallback } from "react";
 
 const API_BASE = "https://study-buddy-backend-doux.onrender.com/";
 
+// Safely parses a fetch response as JSON, with a clear error if the server
+// returned something else (e.g. an HTML error page during a cold start).
+async function parseJsonResponse(res) {
+  const contentType = res.headers.get("content-type") || "";
+  if (!contentType.includes("application/json")) {
+    throw new Error(
+      res.status === 404 || res.status === 502 || res.status === 503
+        ? "The server is waking up (this can take up to a minute on the free tier). Please try again shortly."
+        : `Server returned an unexpected response (status ${res.status}). Please try again.`
+    );
+  }
+  return res.json();
+}
+
 function UploadZone({ onUploaded }) {
   const [file, setFile] = useState(null);
   const [dragActive, setDragActive] = useState(false);
@@ -37,7 +51,7 @@ function UploadZone({ onUploaded }) {
         method: "POST",
         body: formData,
       });
-      const data = await res.json();
+      const data = await parseJsonResponse(res);
       if (!res.ok) throw new Error(data.detail || "Upload failed.");
       onUploaded(file.name, data.word_count);
     } catch (err) {
@@ -299,7 +313,7 @@ export default function App() {
     setSummaryError("");
     try {
       const res = await fetch(`${API_BASE}/summarize`, { method: "POST" });
-      const data = await res.json();
+      const data = await parseJsonResponse(res);
       if (!res.ok) throw new Error(data.detail || "Could not generate summary.");
       setSummary(data.summary);
     } catch (err) {
@@ -316,7 +330,7 @@ export default function App() {
       const res = await fetch(`${API_BASE}/quiz?num_questions=${numQuestions}`, {
         method: "POST",
       });
-      const data = await res.json();
+      const data = await parseJsonResponse(res);
       if (!res.ok) throw new Error(data.detail || "Could not generate quiz.");
       setQuestions(data.questions);
     } catch (err) {
