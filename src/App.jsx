@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 
-const API_BASE = "https://study-buddy-backend-doux.onrender.com/";
+const API_BASE = "https://study-buddy-backend-doux.onrender.com";
 
 function UploadZone({ onUploaded }) {
   const [file, setFile] = useState(null);
