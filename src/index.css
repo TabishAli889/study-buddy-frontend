@@ -115,8 +115,26 @@ body {
   margin-bottom: 16px;
 }
 
-input[type="file"] {
-  display: none;
+.upload-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.upload-buttons .btn {
+  min-width: 150px;
+}
+
+@media (max-width: 480px) {
+  .upload-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .upload-buttons .btn {
+    width: 100%;
+    min-width: 0;
+  }
 }
 
 .btn {

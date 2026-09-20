@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 
-const API_BASE = "https://study-buddy-backend-doux.onrender.com";
+const API_BASE = "https://study-buddy-frontend-psi-wine.vercel.app";
 
 function UploadZone({ onUploaded }) {
   const [file, setFile] = useState(null);
@@ -67,26 +67,28 @@ function UploadZone({ onUploaded }) {
         <p>Drag a PDF of your lecture notes here, or choose a file.</p>
       )}
 
-      <label className="btn btn-outline" htmlFor="file-input" style={{ marginRight: 10 }}>
-        Choose PDF
-      </label>
-      <input
-        id="file-input"
-        type="file"
-        accept="application/pdf"
-        onChange={(e) => handleFile(e.target.files?.[0])}
-      />
+      <div className="upload-buttons">
+        <label className="btn btn-outline" htmlFor="file-input">
+          Choose PDF
+        </label>
+        <input
+          id="file-input"
+          type="file"
+          accept="application/pdf"
+          onChange={(e) => handleFile(e.target.files?.[0])}
+        />
 
-      <button className="btn btn-accent" disabled={!file || uploading} onClick={submitUpload}>
-        {uploading ? (
-          <>
-            <span className="spinner" />
-            Processing…
-          </>
-        ) : (
-          "Upload & Process"
-        )}
-      </button>
+        <button className="btn btn-accent" disabled={!file || uploading} onClick={submitUpload}>
+          {uploading ? (
+            <>
+              <span className="spinner" />
+              Processing…
+            </>
+          ) : (
+            "Upload & Process"
+          )}
+        </button>
+      </div>
 
       {error && <div className="status-line error">{error}</div>}
     </div>
